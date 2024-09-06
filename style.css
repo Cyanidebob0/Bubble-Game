@@ -93,6 +93,29 @@ html,body {
     background-color:  rgb(93, 131, 100);;
 } 
 
+#styledButton {
+    height: 120px;
+    width: 360px;
+    background-color: rgb(164, 228, 176);
+    color: white;
+    font-size: 3rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    margin-left: 430px;
+    margin-top: 160px;
+}
+
+#styledButton:hover {
+    background-color: rgb(93, 131, 100);
+}
+
+
 
 
 

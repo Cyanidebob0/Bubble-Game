@@ -3,6 +3,7 @@ let rand=0;
 let panel=document.querySelector("#inner-panel2");
 let hitVar=0;
 let score=0;
+let flag=0;
 
 let hitVal =()=>{
     hitVar=Math.floor(10 * Math.random())
@@ -30,20 +31,36 @@ let runTimer=()=>{
     },1000)
 };
 
-panel.addEventListener("click",(e)=>{
+panel.addEventListener("click", (e) => {
     let target = e.target;
-    let ClickedNum=Number(target.innerText);
-    if(ClickedNum === hitVar){
-        document.querySelector("#Score").textContent=`${++score}`;
+    
+    if (target.id === "styledButton") {
+        if (flag === 0) { 
+            flag = 1;
+            hitVal(); 
+            createBubble(); 
+            runTimer(); 
+        }
+    } 
+    else if (target.id === "bubble") {
+        let ClickedNum = Number(target.innerText);
+        if (ClickedNum === hitVar) {
+            score++;
+            document.querySelector("#Score").textContent = score;
+        }
+        hitVal(); 
+        createBubble(); 
+    } 
+    else if (flag === 0) {
+        alert("Please Click on Start");
+    } 
+    else {
+        alert("Please click on the bubbles");
     }
-    hitVal();
-    createBubble();
-})
+});
 
-hitVal();
-createBubble();
 
-runTimer();
+
 
 
 
