@@ -1,4 +1,4 @@
-let timerVar = 20;
+let timerVar = 0;
 let rand = 0;
 let panel = document.querySelector("#inner-panel2");
 let hitVar = 0;
