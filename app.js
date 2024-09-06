@@ -21,7 +21,9 @@ let createBubble=()=>{
 let runTimer=()=>{
     let interval=setInterval(()=>{
         if (timerVar <= 0) {
-            clearInterval(interval); 
+            clearInterval(interval);
+            document.querySelector("#inner-panel2").innerHTML = ''; 
+
         }
         document.querySelector("#timer").textContent=`${timerVar}`;
         timerVar--;
