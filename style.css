@@ -121,22 +121,24 @@ html,body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 #gameOverMessage {
-    text-align: center;
-    color: white;
+    font-size: 3rem;
+    color: rgb(164, 228, 176);
+    margin-bottom: 20px; 
 }
 
 #finalScore {
     font-size: 3rem;
     font-weight: 600;
-    margin: 20px 0;
+    margin-bottom: 20px; 
 }
 
 #restartButton {
@@ -149,16 +151,11 @@ html,body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
 }
 
-
-
-
-
+#restartButton:hover {
+    background-color: rgb(93, 131, 100);
+}
 
 
