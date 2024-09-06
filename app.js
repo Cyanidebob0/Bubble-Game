@@ -1,68 +1,83 @@
-let timerVar=20;
-let rand=0;
-let panel=document.querySelector("#inner-panel2");
-let hitVar=0;
-let score=0;
-let flag=0;
+let timerVar = 20;
+let rand = 0;
+let panel = document.querySelector("#inner-panel2");
+let hitVar = 0;
+let score = 0;
+let flag = 0;
+let interval;
 
-let hitVal =()=>{
-    hitVar=Math.floor(10 * Math.random())
-    document.querySelector("#hit").textContent=hitVar;
-}
+let hitVal = () => {
+    hitVar = Math.floor(10 * Math.random());
+    document.querySelector("#hit").textContent = hitVar;
+};
 
-let createBubble=()=>{
-    var bubbles="";
-    for ( var i =0; i<170;i++){ 
-        rand= Math.floor(10 * Math.random());
-        bubbles +=`<div id="bubble">${rand}</div>`;
-    };
-    document.querySelector("#inner-panel2").innerHTML=bubbles;
-}
+let createBubble = () => {
+    let bubbles = "";
+    for (let i = 0; i < 170; i++) {
+        rand = Math.floor(10 * Math.random());
+        bubbles += `<div id="bubble">${rand}</div>`;
+    }
+    document.querySelector("#inner-panel2").innerHTML = bubbles;
+};
 
-let runTimer=()=>{
-    let interval=setInterval(()=>{
+let runTimer = () => {
+    if (interval) {
+        clearInterval(interval);
+    }
+    interval = setInterval(() => {
         if (timerVar <= 0) {
             clearInterval(interval);
-            document.querySelector("#inner-panel2").innerHTML = ''; 
-
+            interval = null; 
+            document.querySelector("#inner-panel2").innerHTML = '';
+            document.querySelector("#finalScore").textContent = `Score: ${score}`;
+            document.querySelector("#gameOverScreen").style.display = 'flex';
+        } else {
+            document.querySelector("#timer").textContent = `${timerVar}`;
+            timerVar--;
         }
-        document.querySelector("#timer").textContent=`${timerVar}`;
-        timerVar--;
-    },1000)
+    }, 1000);
+};
+
+let resetGame = () => {
+    timerVar = 20;
+    score = 0;
+    flag = 0;
+    document.querySelector("#Score").textContent = '0';
+    document.querySelector("#timer").textContent = '20';
+    document.querySelector("#hit").textContent = '0';
+    document.querySelector("#inner-panel2").innerHTML = ' ';
+    document.querySelector("#gameOverScreen").style.display = 'none';
+    document.querySelector("#inner-panel2").innerHTML = '<button id="styledButton">Start Game!!!</button>';
+
+    
 };
 
 panel.addEventListener("click", (e) => {
     let target = e.target;
-    
+
     if (target.id === "styledButton") {
-        if (flag === 0) { 
+        if (flag === 0) {
             flag = 1;
-            hitVal(); 
-            createBubble(); 
-            runTimer(); 
+            hitVal();
+            createBubble();
+            runTimer();
         }
-    } 
-    else if (target.id === "bubble") {
+    } else if (target.id === "bubble") {
         let ClickedNum = Number(target.innerText);
         if (ClickedNum === hitVar) {
             score++;
             document.querySelector("#Score").textContent = score;
         }
-        hitVal(); 
-        createBubble(); 
-    } 
-    else if (flag === 0) {
+        hitVal();
+        createBubble();
+    } else if (flag === 0) {
         alert("Please Click on Start");
-    } 
-    else {
+    } else {
         alert("Please click on the bubbles");
     }
 });
 
-
-
-
-
-
-
-
+document.querySelector("#restartButton").addEventListener("click", () => {
+    console.log('Restart button clicked');
+    resetGame();
+});
